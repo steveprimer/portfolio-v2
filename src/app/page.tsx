@@ -1,10 +1,11 @@
-"use client"; // <--- This enables animations
+"use client";
 
 import { Github, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+// specific import path based on your previous snippet
 import ProjectCard from "@/app/components/ProjectCard";
 import { motion } from "framer-motion";
-import { video } from "framer-motion/client";
+import Image from "next/image";
 
 export default function Home() {
   const projects = [
@@ -52,7 +53,7 @@ export default function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Stagger effect for children
+        staggerChildren: 0.1,
         delayChildren: 0.3,
       },
     },
@@ -77,6 +78,20 @@ export default function Home() {
         className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24"
       >
         <div>
+          {/* --- PROFILE IMAGE SECTION START --- */}
+          <div className="mb-8 block lg:w-48">
+            <Image
+              src="/profile.jpg"
+              alt="Anson Stephan"
+              width={160}
+              height={160}
+              quality={95}
+              priority
+              className="rounded-full border-2 border-slate-200/10 bg-slate-800 object-cover shadow-2xl filter grayscale transition-all duration-500 hover:grayscale-0"
+            />
+          </div>
+          {/* --- PROFILE IMAGE SECTION END --- */}
+
           <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
             Anson Stephan
           </h1>
