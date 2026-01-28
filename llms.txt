@@ -1,0 +1,23 @@
+# Anson Stephan - Front End Developer & Agency Founder
+
+## Bio
+I am a developer passionate about crafting accessible, pixel-perfect user interfaces that blend thoughtful design with robust engineering. I am the co-founder of A* Codex (formerly ScaleBridge), a digital agency helping brands scale their presence.
+
+## Expertise
+- **Core:** React, Next.js, Tailwind CSS, TypeScript
+- **Stack:** MERN (MongoDB, Express, React, Node.js)
+- **Focus:** Accessibility, Performance, SEO, UI/UX Design
+
+## Experience
+- **Co-Founder & Lead Developer @ A* Codex (2025 - Present)**
+  Leading a digital agency focused on web development and SEO. Expanding into custom software solutions.
+  [Website](https://astarcodex.com)
+
+## Key Projects
+1. **ScaleBridge Agency:** High-performance agency site. 95+ PageSpeed score.
+2. **AI Chat Support:** GPT-powered customer service assistant for e-commerce.
+3. **Aromatte Luxe:** Full-stack luxury perfume e-commerce platform.
+
+## Contact
+- GitHub: https://github.com/steveprimer/
+- LinkedIn: https://www.linkedin.com/in/anson-stephan-71132525b/
