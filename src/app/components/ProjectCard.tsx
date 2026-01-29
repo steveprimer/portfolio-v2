@@ -12,6 +12,8 @@ interface ProjectProps {
   link: string;
   year: string;
   videoSrc?: string;
+  // New prop to communicate with the parent page
+  onHoverAction?: (videoSrc: string | null) => void;
 }
 
 export default function ProjectCard({
@@ -21,15 +23,28 @@ export default function ProjectCard({
   link,
   year,
   videoSrc,
+  onHoverAction,
 }: ProjectProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleMouseEnter = () => {
+    // 1. Play local video inside the card
     if (videoRef.current) videoRef.current.play();
+
+    // 2. Trigger the global cinematic background
+    if (onHoverAction && videoSrc) {
+      onHoverAction(videoSrc);
+    }
   };
 
   const handleMouseLeave = () => {
+    // 1. Pause local video
     if (videoRef.current) videoRef.current.pause();
+
+    // 2. Clear the global background
+    if (onHoverAction) {
+      onHoverAction(null);
+    }
   };
 
   return (
@@ -38,14 +53,11 @@ export default function ProjectCard({
       target="_blank"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+      className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-100"
     >
-      {/* GLASS CONTAINER 
-        This div wraps the background video and the glass overlay.
-        It appears only on Desktop (lg:block).
-      */}
+      {/* GLASS CONTAINER */}
       <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-xl transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:shadow-[0_0_30px_0_rgba(255,255,255,0.05)] overflow-hidden">
-        {/* LAYER 1: VIDEO (The "Alive" Background) */}
+        {/* LAYER 1: LOCAL VIDEO (Inside the card) */}
         {videoSrc ? (
           <video
             ref={videoRef}
@@ -53,11 +65,9 @@ export default function ProjectCard({
             loop
             muted
             playsInline
-            // Starts invisible/grayscale. On hover: becomes visible (70% opacity) and full color.
-            className="absolute inset-0 h-full w-50 object-cover opacity-0 grayscale transition-all duration-500 group-hover:opacity-70 group-hover:grayscale-0"
+            className="absolute inset-0 h-full w-full object-cover opacity-0 grayscale transition-all duration-500 group-hover:opacity-70 group-hover:grayscale-0"
           />
         ) : (
-          // FALLBACK: Gradient if no video
           <motion.div
             className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{
@@ -69,18 +79,13 @@ export default function ProjectCard({
           />
         )}
 
-        {/* LAYER 2: THE REAL GLASS OVERLAY 
-           Based on your InfiniteLogoScroller.jsx.
-           - Gradient: White opacity (sheen) instead of flat slate.
-           - Border: White/10 to define the edge.
-           - Blur: Softens the video behind it.
-        */}
+        {/* LAYER 2: GLASS OVERLAY (Permanently Visible) */}
         <div
           className="absolute inset-0 
-            bg-gradient-to-tr from-white/15 via-white/5 to-white/0 
-            border border-white/10 
-            backdrop-blur-[2px] 
-            opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+             bg-white/10 
+             border border-white/10 
+             backdrop-blur-[4px] 
+             opacity-100 transition-opacity duration-300"
         ></div>
       </div>
 
